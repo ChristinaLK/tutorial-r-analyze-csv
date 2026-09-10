@@ -3,7 +3,7 @@
 shell = Rscript spill_calculation.ospool.R $(dataset)
 
 ### What files do we need? 
-transfer_input_files = spill_calculation.ospool.Rm, data/$(dataset)
+transfer_input_files = spill_calculation.ospool.R, data/$(dataset)
 
 ### set the R environment with a container
 container_image = /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-r:3.5.0
