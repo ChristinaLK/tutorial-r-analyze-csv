@@ -1,28 +1,25 @@
-# File Name: R.submit
-universe = container
+### What command do we want to run? 
+# the $(dataset) variable is set in the final `queue` statement
+shell = Rscript spill_calculation.ospool.R $(dataset)
+
+### What files do we need? 
+transfer_input_files = spill_calculation.ospool.Rm, data/$(dataset)
+
+### set the R environment with a container
 container_image = /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-r:3.5.0
 
-# Specify your executable and arguments
-executable = spill_calculation.r
-arguments = spills_1950_1959.csv
-
-# Tell HTCondor what to name log, standard error, and standard output("screen output") files
-log = log/spills.log
-output = output/spills.out
-error = error/spills.error
-
-#Specify the job duration
+# Specify other job options
 +JobDurationCategory = "Medium"
-
-# Specify that HTCondor should transfer files to and from the
-#  computer where each job runs. 
-transfer_input_files = data/spills_1950_1959.csv
 should_transfer_files = YES
 
-# Amount of resources available to your jobs
-request_cpus = 1
+request_cpus   = 1
 request_memory = 1GB
-request_disk = 1GB
+request_disk   = 1GB
 
-# Tell HTCondor to queue a job for each data file
-queue 
+log    = log/$(dataset).log
+output = output/$(dataset).out
+error  = error/$(dataset).error
+
+### Set the "dataset" variable and queue one job
+dataset = spills_1950_1959.csv
+queue 1
