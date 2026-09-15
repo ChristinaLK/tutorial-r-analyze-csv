@@ -6,7 +6,7 @@ shell = Rscript spill_calculation.ospool.R $(dataset)
 transfer_input_files = spill_calculation.ospool.R, data/$(dataset)
 
 ### set the R environment with a container
-container_image = /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-r:3.5.0
+container_image = osdf:///osg-public/containers/r-ver-3.5.0.sif
 
 # Specify other job options
 +JobDurationCategory = "Medium"
